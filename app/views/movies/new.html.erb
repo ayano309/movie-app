@@ -15,29 +15,34 @@
     <%= form_with model: @movie, local:true do |f| %>
       <div class="form-group">
         <%= f.label :date , '日付'%>
-        <%=  f.date_select :date, start_year:Time.now.year,  end_year:1950, class: 'form-control' %><br>
-      </div>
+        <%=  f.date_select :date, start_year:Time.now.year,  end_year:1950, class: 'form-control' %>
+      </div><br>
 
+      <div class="form-group">
+        <%= f.label :date , '画像'%>
+        <%= f.file_field :image, accept: "image/*" %>
+      </div><br>
+      
       <div class="form-group">
         <%= f.label :title , 'タイトル'%>
         <%= f.text_field :title, class: 'form-control'%>
-      </div>
+      </div><br>
 
       <div class="form-group">
         <%= f.label :director , '監督'%>
         <%= f.text_field :director,  class: 'form-control' %>
-      </div>
+      </div><br>
 
       <div class="form-group">
         <%= f.label :appearance , '出演'%>
         <%= f.text_field :appearance,  class: 'form-control' %>
-      </div>
+      </div><br>
 
       <div class="form-group">
         <%= f.label :body , '内容'%>
         <%= f.text_area :body %><br>
-      </div>
-      
+      </div><br>
+
       <%= f.submit '保存', class: 'btn btn-primary' %>
     <% end %>
 

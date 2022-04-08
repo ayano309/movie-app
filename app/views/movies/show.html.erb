@@ -1,2 +1,17 @@
-<h1>Movies#show</h1>
-<p>Find me in app/views/movies/show.html.erb</p>
+<div class="container">
+  <div class="card mt-3" style="width: 80%">
+    <div class="card-image"><%= image_tag @movie.get_image, width: '100%', height: '100%'%></div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><strong><%= @movie.date %></strong></li>
+      <h1 class="card-title list-group-item"><strong><%= @movie.title %></strong></h1>
+      <li class="list-group-item"><strong>監督</strong> <%= @movie.director %></li>
+      <li class="list-group-item"><strong>出演</strong> <%= @movie.appearance %></li>
+    </ul>
+    <div class="card-body">
+      <p class="card-text"> <%= @movie.body %></p>
+    </div>
+  </div>
+  <%= link_to "back" ,movies_path ,class:"btn"%>
+  <%= link_to "edit" ,edit_movie_path(@movie),class:"btn"%>
+  <%= link_to "delete" ,movie_path(@movie) ,data:{method: 'delete',confirm:'本当に削除してもよろしいですか？'},class:"btn"%>
+</div>

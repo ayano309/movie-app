@@ -28,8 +28,8 @@ class MoviesController < ApplicationController
   end
 
   def update
-    @movie = current_user.movies.find(movie_params)
-    if @movie.update
+    @movie = current_user.movies.find(params[:id])
+    if @movie.update(movie_params)
       redirect_to movie_path(@movie), notice: 'successfully updated'
     else
       render :edit
@@ -45,6 +45,6 @@ class MoviesController < ApplicationController
   private
 
   def movie_params
-    params.require(:movie).permit(:date, :title, :appearance, :director, :body)
+    params.require(:movie).permit(:date, :title, :appearance, :director, :body, :image)
   end
 end

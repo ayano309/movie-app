@@ -1,22 +1,28 @@
 <div class="container">
   <% @movies.each do |movie|%>
-    <div class="card mt-3" style="width: 90%">
-    <svg class="card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"></svg>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Cras justo odio<%= movie.title %></li>
-      <li class="list-group-item">Dapibus ac facilisis in<%= movie.appearance %></li>
-      <li class="list-group-item">Vestibulum at eros<%= movie.director %></li>
-      <li class="list-group-item">Vestibulum at eros<%= movie.appearance %></li>
-    </ul>
-    <div class="card-body">
-      <h5 class="card-title">Card title<%= movie.title %></h5>
-      <p class="card-text"><%= movie.body %></p>
-    </div>
-    
-    <div class="card-body">
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
+    <%= link_to movie_path(movie) do %>
+      <div class="card">
+        <div class="card_image">
+          <%= image_tag movie.get_image %>
+        </div>
+        <div class="card_content">
+          <div class="card_title">
+            <%= movie.title %>
+          </div>
+          <div class="card_detail">
+            <div>
+              <p>
+                <%= movie.body %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+  <% end %>
+  <%= link_to new_article_path do%>
+    <div class="float_btn">
+      <i class="fa fa-plus"></i>
     </div>
   <% end %>
 </div>
