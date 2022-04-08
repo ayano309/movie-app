@@ -1,0 +1,28 @@
+<div class="container">
+  <% @movies.each do |movie|%>
+    <%= link_to movie_path(movie) do %>
+      <div class="card">
+        <div class="card_image">
+          <%= image_tag movie.get_image %>
+        </div>
+        <div class="card_content">
+          <div class="card_title">
+            <%= movie.title %>
+          </div>
+          <div class="card_detail">
+            <div>
+              <p>
+                <%= movie.body %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+  <% end %>
+  <%= link_to new_movie_path do%>
+    <div class="float_btn">
+      <i class="fa fa-plus"></i>
+    </div>
+  <% end %>
+</div>
