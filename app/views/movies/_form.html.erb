@@ -1,0 +1,65 @@
+<div class = "container">
+
+  <% if movie.errors.any? %>
+    <div class="alert-box">
+      <h2><%= movie.errors.count %>errors prohibited this book from being saved:</h2>
+      <ul>
+        <% movie.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+  <h1 class="my-3">New Movie</h1>
+    <%= form_with model: movie, local:true do |f| %>
+      <div class="form-group">
+        <%= f.label :date , '日付'%>
+        <%=  f.date_select :date, start_year:Time.now.year,  end_year:1950, class: 'form-control' %>
+      </div><br>
+
+      <div class="form-group">
+        <%= f.label :date , '画像'%>
+        <%= f.file_field :image, accept: "image/*" %>
+      </div><br>
+      
+      <div class="form-group">
+        <%= f.label :title , 'タイトル'%>
+        <%= f.text_field :title, class: 'form-control'%>
+      </div><br>
+
+      <div class="form-group">
+        <%= f.label :director , '監督'%>
+        <%= f.text_field :director,  class: 'form-control' %>
+      </div><br>
+
+      <div class="form-group">
+        <%= f.label :appearance , '出演'%>
+        <%= f.text_field :appearance,  class: 'form-control' %>
+      </div><br>
+
+      <div class="form-group">
+        <%= f.label :body , '内容'%>
+        <%= f.text_area :body %><br>
+      </div><br>
+
+      <div class="form-group row" id="star">
+        <%= f.label :rate,'評価 ', class:"col-md-3 col-form-label" %>
+        <%= f.hidden_field :rate, id: :review_star %>
+      </div>
+
+      <script>
+      $('#star').raty({
+        size     : 36,
+        starOff:  '<%= asset_path('star-off.png') %>',
+        starOn : '<%= asset_path('star-on.png') %>',
+        starHalf: '<%= asset_path('star-half.png') %>',
+        scoreName: 'movie[rate]',
+        half: true,
+      });
+      </script>
+
+      <%= f.submit '保存', class: 'btn btn-primary' %>
+    <% end %>
+
+</div>
