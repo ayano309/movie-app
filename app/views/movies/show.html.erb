@@ -14,4 +14,40 @@
   <%= link_to "back" ,movies_path ,class:"btn btn-outline-dark"%>
   <%= link_to "edit" ,edit_movie_path(@movie),class:"btn btn-outline-success"%>
   <%= link_to "delete" ,movie_path(@movie) ,data:{method: 'delete',confirm:'本当に削除してもよろしいですか？'},class:"btn btn-outline-danger"%>
+
+  
+
+  <!--コメント表示-->
+<div>
+  <p>コメント件数：<%= @movie.comments.count %></p>
+  <% @movie.comments.each do |comment| %>
+    <%= comment.user.name %>
+    <%= comment.created_at.strftime('%Y/%m/%d') %>
+    <%= comment.content %>
+    <% if comment.favorited_by?(current_user) %>
+      <%= link_to movie_comment_favorites_path(comment.movie,comment), method: :delete do %>
+        <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
+        <%= comment.favorites.count %> いいねhazusu
+      <% end %>
+    <% else %>
+      <%= link_to movie_comment_favorites_path(comment.movie,comment), method: :post do %>
+        <i class="fas fa-heart" aria-hidden="true"></i>
+        <%= comment.favorites.count %> いいね
+      <% end %>
+    <% end %>
+    <!--コメントした人だけが削除できる-->
+    <% if comment.user == current_user %>
+      <%= link_to "削除", movie_comment_path(comment.movie, comment), method: :delete %>
+    <% end %>
+  <% end %>
+</div>
+
+<!--コメント投稿-->
+<div>
+  <!--ネストしているから-->
+  <%= form_with model: [@movie, @comment] do |f| %>
+    <%= f.text_area :content, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>
 </div>
