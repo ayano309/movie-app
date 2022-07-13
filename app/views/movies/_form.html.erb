@@ -15,7 +15,7 @@
     <%= form_with model: movie, local:true do |f| %>
       <div class="form-group">
         <%= f.label :date , '日付'%>
-        <%=  f.date_select :date, start_year:Time.now.year,  end_year:1950, class: 'form-control' %>
+        <%=  f.date_field :date %>
       </div><br>
 
       <div class="form-group">

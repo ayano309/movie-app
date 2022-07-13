@@ -3,7 +3,7 @@ class MoviesController < ApplicationController
 
   def index
     @movies = current_user.movies
-
+    @comments = Comment.joins(:movie)
   end
 
   def show

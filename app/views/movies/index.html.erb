@@ -43,3 +43,52 @@
     </div>
   <% end %>
 </div>
+-------------------------------------------------------------------------------------------------------------------------------------------------------ここから
+<div class="container">
+  <div class="content-box">
+    <% @comments.each do|comment|%>
+      <div class="dropdown">
+        <div class="icon dropbtn">
+          <% if comment.kao == "happy"%>
+            <i class="far fa-laugh-beam fa-2x" style="color:orange;"></i>
+          <%elsif comment.kao == "anger"%>
+            <i class="far fa-angry fa-2x" style="color:red;"></i>
+          <%elsif comment.kao == "sad"%>
+            <i class="far fa-tired fa-2x" style="color:skyblue;"></i>
+          <%elsif comment.kao == "mujyou"%>
+            <i class="far fa-meh fa-2x" style="color:gray;"></i>
+          <%end%>
+        </div>
+        <div class="dropdown-content">
+          <%= link_to movie_path(comment.movie) do%>
+            <p class= "btn btn-sm btn-info ">
+              <%= I18n.l(comment.movie.created_at, format: :default)%>
+              の投稿へ
+            </p>
+            <!--<%= I18n.l(comment.created_at, format: :default)%>-->
+            <br>
+            <p class="m-0">コメント内容:</p>
+            <%= comment.content %>
+          <%end %>
+        </div>
+      </div>
+    <%end %>
+  </div>
+
+  <%= month_calendar events: @comments do |date, comments| %>
+    <%= date.day %>
+    <br>
+    <% comments.each do |comment| %>
+      <%# ここは部分テンプレート %>
+      <% if comment.kao == "happy"%>
+        <i class="far fa-laugh-beam fa-2x" style="color:orange;"></i>
+      <%elsif comment.kao == "anger"%>
+        <i class="far fa-angry fa-2x" style="color:red;"></i>
+      <%elsif comment.kao == "sad"%>
+        <i class="far fa-tired fa-2x" style="color:skyblue;"></i>
+      <%elsif comment.kao == "mujyou"%>
+        <i class="far fa-meh fa-2x" style="color:gray;"></i>
+      <%end%>
+    <% end %>
+  <% end %>
+</div>
