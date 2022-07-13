@@ -21,9 +21,23 @@
 <div>
   <p>コメント件数：<%= @movie.comments.count %></p>
   <% @movie.comments.each do |comment| %>
+    
     <%= comment.user.name %>
     <%= comment.created_at.strftime('%Y/%m/%d') %>
     <%= comment.content %>
+    <div class="icon">
+      <% if comment.kao == "happy"%>
+        <i class="fas fa-laugh-beam fa-2x"></i>
+      <%elsif comment.kao == "anger"%>
+        <i class="fas fa-angry fa-2x"></i>
+      <%elsif comment.kao == "sad"%>
+        <i class="fas fa-tired fa-2x"></i>
+      <%elsif comment.kao == "mujyou"%>
+        <i class="fas fa-meh fa-2x"></i>
+      <%end%>
+    </div>
+    <!--<%= comment.kao_i18n %> -->
+    <br>
     <% if comment.favorited_by?(current_user) %>
       <%= link_to movie_comment_favorites_path(comment.movie,comment), method: :delete do %>
         <i class="fas fa-heart" aria-hidden="true" style="color: red;"></i>
@@ -39,6 +53,7 @@
     <% if comment.user == current_user %>
       <%= link_to "削除", movie_comment_path(comment.movie, comment), method: :delete %>
     <% end %>
+    <br>
   <% end %>
 </div>
 
@@ -46,6 +61,7 @@
 <div>
   <!--ネストしているから-->
   <%= form_with model: [@movie, @comment] do |f| %>
+    <%= f.select  :kao, Comment.kaos_i18n.invert, {include_blank: "感情を選択してください"}, {class: "form-control", required: true} %>
     <%= f.text_area :content, rows: '5', placeholder: "コメントをここに" %>
     <%= f.submit "送信する" %>
   <% end %>

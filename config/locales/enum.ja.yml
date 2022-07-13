@@ -1,0 +1,8 @@
+ja:
+  enums:
+    comment:
+      kao:
+        happy: '楽しかった'
+        anger: '怒り'
+        sad: '悲しい'
+        mujyou: '無表情'
