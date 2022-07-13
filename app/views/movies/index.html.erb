@@ -45,8 +45,9 @@
 </div>
 -------------------------------------------------------------------------------------------------------------------------------------------------------ここから
 <div class="container">
+  <p class="btn btn-success btn-sm">今月の感情</p>
   <div class="content-box">
-    <% @comments.each do|comment|%>
+    <% @comments.comment_month.each do|comment|%>
       <div class="dropdown">
         <div class="icon dropbtn">
           <% if comment.kao == "happy"%>

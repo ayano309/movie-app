@@ -8,6 +8,7 @@ class Comment < ApplicationRecord
 
   enum kao: { happy: 0, anger: 1, sad: 2, mujyou: 3 ,important: 4 ,other: 5}
 
+  scope :comment_month, ->{where(created_at: Time.zone.today.all_month)}
   def start_time
     created_at
   end
