@@ -6,7 +6,7 @@ class Comment < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
 
-  enum kao: { happy: 0, anger: 1, sad: 2, mujyou: 3 }
+  enum kao: { happy: 0, anger: 1, sad: 2, mujyou: 3 ,important: 4 ,other: 5}
 
   def start_time
     created_at

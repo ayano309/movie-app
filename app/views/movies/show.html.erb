@@ -61,7 +61,11 @@
 <div>
   <!--ネストしているから-->
   <%= form_with model: [@movie, @comment] do |f| %>
-    <%= f.select  :kao, Comment.kaos_i18n.invert, {include_blank: "感情を選択してください"}, {class: "form-control", required: true} %>
+    <%= f.collection_radio_buttons :kao, Comment.kaos_i18n, :first , :last do |b|%>
+      <%= b.label(class: "radio_button") { b.radio_button(class: "radio_button") + b.text }%>
+    <% end %>
+    <br>
+    <!--<%= f.select  :kao, Comment.kaos_i18n.invert, {include_blank: "感情を選択してください"}, {class: "form-control", required: true} %>-->
     <%= f.text_area :content, rows: '5', placeholder: "コメントをここに" %>
     <%= f.submit "送信する" %>
   <% end %>
