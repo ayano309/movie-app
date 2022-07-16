@@ -18,30 +18,18 @@
   
 
   <!--コメント表示-->
+  <div class="movie_comments">
+    <%= render 'comments/index', movie: @movie %>
+  </div>
 <div>
   <p>コメント件数：<%= @movie.comments.count %></p>
-  <% @movie.comments.each do |comment| %>
-    <div id="comment_<%= comment.id %>"> 
-      <%= comment.user.name %>
-      <%= comment.created_at.strftime('%Y/%m/%d') %>
-      <%= comment.content %>
-      <!--<%= comment.kao_i18n %> -->
-      <br>
-      <div class="favorite-btn"><%= render "favorites/favorite-btn", comment: comment %></div>
-      
-      <!--コメントした人だけが削除できる-->
-      <% if comment.user == current_user %>
-        <%= link_to "削除", movie_comment_path(comment.movie, comment), method: :delete %>
-      <% end %>
-      <br>
-    </div>
-  <% end %>
+  
 </div>
 
 <!--コメント投稿-->
 <div>
   <!--ネストしているから-->
-  <%= form_with model: [@movie, @comment] do |f| %>
+  <%= form_with model: [@movie, @comment], local: false do |f| %>
     <%= f.collection_radio_buttons :kao, Comment.kaos_i18n, :first , :last do |b|%>
       <%= b.label(class: "radio_button") { b.radio_button(class: "radio_button") + b.text }%>
     <% end %>

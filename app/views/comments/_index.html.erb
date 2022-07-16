@@ -1,0 +1,19 @@
+<% @movie.comments.each do |comment| %>
+  <!--id="movie_<%= @movie.id %>”ここ追加-->
+  <div id="movie_<%= @movie.id %>"> 
+    <div id="comment_<%= comment.id %>"> 
+      <%= comment.user.name %>
+      <%= comment.created_at.strftime('%Y/%m/%d') %>
+      <%= comment.content %>
+      <!--<%= comment.kao_i18n %> -->
+      <br>
+      <div class="favorite-btn"><%= render "favorites/favorite-btn", comment: comment %></div>
+      
+      <!--コメントした人だけが削除できる-->
+      <% if comment.user == current_user %>
+        <%= link_to "削除", movie_comment_path(comment.movie, comment), method: :delete, remote: true %>
+      <% end %>
+      <br>
+    </div>
+  </div>
+<% end %>
