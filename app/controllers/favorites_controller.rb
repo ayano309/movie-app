@@ -4,7 +4,7 @@ class FavoritesController < ApplicationController
     @comment = @movie.comments.find(params[:comment_id])
     @favorite = current_user.favorites.new(comment_id: @comment.id,movie_id: @movie.id)
     @favorite.save
-    redirect_to request.referer
+    
   end
 
   def destroy
@@ -12,6 +12,6 @@ class FavoritesController < ApplicationController
     @comment = @movie.comments.find(params[:comment_id])
     @favorite = current_user.favorites.find_by(comment_id: @comment.id,movie_id: @movie.id)
     @favorite.destroy
-    redirect_to request.referer
+    
   end
 end
