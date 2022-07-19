@@ -22,7 +22,11 @@
         </div>
       <% end %>
     </div>
-
+    <div id="loading">
+      <div class="kvArea" id="loading_box">
+        <div class="img_box"><%= image_tag 'caregiver.png', class:"fadeUp"%></div>
+      </div>
+    </div>
 
   <ul class="slider">
     <li>
@@ -75,6 +79,14 @@
         }
       }
     ]
+    });
+
+
+
+    //ローディング画面の表示
+    $(window).on('load',function(){
+      $("#loading").delay(3000).fadeOut('slow');//ローディング画面を1.5秒（1500ms）待機してからフェードアウト
+      $("#loading_box").delay(3000).fadeOut('slow');//ローディング画像を1.2秒（1200ms）待機してからフェードアウト
     });
     </script>
   <%= yield %>
