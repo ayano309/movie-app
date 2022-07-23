@@ -4,6 +4,15 @@ class MoviesController < ApplicationController
   def index
     @movies = current_user.movies
     @comments = Comment.joins(:movie)
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'Movie_file', # ファイル名は自由
+              template: 'movies/index.html.erb',
+              encoding: 'UTF-8',
+              layout: 'pdf'
+      end
+    end
   end
 
   def show
