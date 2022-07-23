@@ -16,4 +16,8 @@ class Movie < ApplicationRecord
       'no_image.jpg'
     end
   end
+
+  def meal_by?(user)
+    meals.exists?(user_id: user.id)
+  end
 end
