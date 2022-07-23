@@ -4,6 +4,7 @@ class Movie < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :meals, dependent: :destroy
+  accepts_nested_attributes_for :meals, allow_destroy: true
   has_one_attached :image
   validates :title, presence: true
   validates :body, presence: true

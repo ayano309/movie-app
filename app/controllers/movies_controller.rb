@@ -55,6 +55,8 @@ class MoviesController < ApplicationController
   private
 
   def movie_params
-    params.require(:movie).permit(:date, :title, :appearance, :director, :body, :image, :rate)
+    params.require(:movie).permit(:date, :title, :appearance, :director, :body, :image, :rate, meal_attributes: %I(breakfast lunch dinner ))
   end
+
+  
 end
