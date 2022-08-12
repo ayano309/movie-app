@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "home#index"
   resources :movies do
-    resource :meals, only: [:create,:update, :destroy]
+    resource :likes, only: [:create, :destroy]
+    resource :meals, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]  do
       resource :favorites, only: [:create, :destroy]
     end

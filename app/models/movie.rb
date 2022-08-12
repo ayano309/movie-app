@@ -21,4 +21,11 @@ class Movie < ApplicationRecord
   def meal_by?(user)
     meals.exists?(user_id: user.id)
   end
+
+  has_many :likes, dependent: :destroy
+
+  #ユーザidがFavoritesテーブル内に存在（exists?）するかどうかを調べる
+  def favorited_by?(user)
+    likes.exists?(user_id: user.id)
+  end
 end
