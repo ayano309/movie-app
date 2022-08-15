@@ -18,6 +18,7 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
     @comment = Comment.new
+    @like_comment = Likecomment.new
   end
 
   def new
