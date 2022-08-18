@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_12_122809) do
+ActiveRecord::Schema.define(version: 2022_08_15_011913) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -62,6 +62,20 @@ ActiveRecord::Schema.define(version: 2022_08_12_122809) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
+  create_table "likecomments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "movie_id", null: false
+    t.integer "like_id", null: false
+    t.integer "shape", null: false
+    t.integer "color", null: false
+    t.integer "smell", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["like_id"], name: "index_likecomments_on_like_id"
+    t.index ["movie_id"], name: "index_likecomments_on_movie_id"
+    t.index ["user_id"], name: "index_likecomments_on_user_id"
+  end
+
   create_table "likes", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "movie_id", null: false
@@ -111,6 +125,9 @@ ActiveRecord::Schema.define(version: 2022_08_12_122809) do
   add_foreign_key "favorites", "comments"
   add_foreign_key "favorites", "movies"
   add_foreign_key "favorites", "users"
+  add_foreign_key "likecomments", "likes"
+  add_foreign_key "likecomments", "movies"
+  add_foreign_key "likecomments", "users"
   add_foreign_key "likes", "movies"
   add_foreign_key "likes", "users"
 end
